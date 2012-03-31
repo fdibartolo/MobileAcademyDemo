@@ -14,6 +14,9 @@ namespace MobileAcademyDemo
 		[Outlet]
 		MonoTouch.UIKit.UILabel lblMessage { get; set; }
 
+		[Outlet]
+		MonoTouch.UIKit.UITextField textPassword { get; set; }
+
 		[Action ("OnTapped:")]
 		partial void OnTapped (MonoTouch.UIKit.UIButton sender);
 		
@@ -22,6 +25,11 @@ namespace MobileAcademyDemo
 			if (lblMessage != null) {
 				lblMessage.Dispose ();
 				lblMessage = null;
+			}
+
+			if (textPassword != null) {
+				textPassword.Dispose ();
+				textPassword = null;
 			}
 		}
 	}

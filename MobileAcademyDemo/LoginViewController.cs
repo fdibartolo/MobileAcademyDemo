@@ -12,6 +12,14 @@ namespace MobileAcademyDemo
 		{
 		}
 		
+		partial void OnTapped (MonoTouch.UIKit.UIButton sender){
+			var message = (textPassword.Text == "123")
+				? "login succesfull"
+				: "wrong password";
+			
+			new UIAlertView("My Notes", message, null, "Ok").Show();
+		}
+		
 		public override void DidReceiveMemoryWarning ()
 		{
 			// Releases the view if it doesn't have a superview.
@@ -44,11 +52,6 @@ namespace MobileAcademyDemo
 			// Return true for supported orientations
 			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
 		}
-		
-		partial void OnTapped (MonoTouch.UIKit.UIButton sender){
-			this.lblMessage.Text = "Boom!";	
-		}
-
 	}
 }
 
