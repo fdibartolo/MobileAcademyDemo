@@ -71,6 +71,7 @@
     <Compile Include="LoginViewController.designer.cs">
       <DependentUpon>LoginViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="NotesTableViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LoginViewController.xib" />

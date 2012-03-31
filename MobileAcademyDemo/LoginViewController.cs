@@ -13,11 +13,14 @@ namespace MobileAcademyDemo
 		}
 		
 		partial void OnTapped (MonoTouch.UIKit.UIButton sender){
-			var message = (textPassword.Text == "123")
-				? "login succesfull"
-				: "wrong password";
-			
-			new UIAlertView("My Notes", message, null, "Ok").Show();
+			if (textPassword.Text != "123")
+				new UIAlertView("My Notes", "Wrong password!", null, "Ok").Show();
+			else
+			{
+				var controller = new NotesTableViewController();
+				var navigationController = new UINavigationController(controller);
+				this.PresentModalViewController(navigationController, true);
+			}
 		}
 		
 		public override void DidReceiveMemoryWarning ()
