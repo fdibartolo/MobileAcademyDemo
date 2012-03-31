@@ -15,7 +15,6 @@ namespace MobileAcademyDemo
 	{
 		// class-level declarations
 		UIWindow window;
-		UINavigationController navigationController;
 		
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
@@ -28,15 +27,15 @@ namespace MobileAcademyDemo
 		{
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 
-			var controller = new RootViewController ();
-			navigationController = new UINavigationController (controller);
-			window.RootViewController = navigationController;
+			var controller = new LoginViewController ();
+			window.RootViewController = controller;
 
 			// make the window visible
 			window.MakeKeyAndVisible ();
 			
 			return true;
 		}
+		
 	}
 }
 

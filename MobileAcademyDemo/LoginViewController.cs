@@ -1,36 +1,15 @@
 using System;
 using System.Drawing;
-using System.Collections.Generic;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace MobileAcademyDemo
 {
-	public partial class DetailViewController : UIViewController
+	public partial class LoginViewController : UIViewController
 	{
-		object detailItem;
-		
-		public DetailViewController () : base ("DetailViewController", null)
+		public LoginViewController () : base ("LoginViewController", null)
 		{
-			Title = NSBundle.MainBundle.LocalizedString ("Detail", "Detail");
-		}
-		
-		public void SetDetailItem (object newDetailItem)
-		{
-			if (detailItem != newDetailItem) {
-				detailItem = newDetailItem;
-				
-				// Update the view
-				ConfigureView ();
-			}
-		}
-		
-		void ConfigureView ()
-		{
-			// Update the user interface for the detail item
-			if (detailItem != null)
-				detailDescriptionLabel.Text = detailItem.ToString ();
 		}
 		
 		public override void DidReceiveMemoryWarning ()
@@ -65,6 +44,11 @@ namespace MobileAcademyDemo
 			// Return true for supported orientations
 			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
 		}
+		
+		partial void OnTapped (MonoTouch.UIKit.UIButton sender){
+			this.lblMessage.Text = "Boom!";	
+		}
+
 	}
 }
 
