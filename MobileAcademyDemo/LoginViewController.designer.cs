@@ -1,3 +1,4 @@
+// WARNING
 //
 // This file has been generated automatically by MonoDevelop to store outlets and
 // actions made in the Xcode designer. If it is removed, they will be lost.
@@ -7,19 +8,21 @@ using MonoTouch.Foundation;
 
 namespace MobileAcademyDemo
 {
-	[Register ("DetailViewController")]
-	partial class DetailViewController
+	[Register ("LoginViewController")]
+	partial class LoginViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UILabel detailDescriptionLabel { get; set; }
+		MonoTouch.UIKit.UILabel lblMessage { get; set; }
+
+		[Action ("OnTapped:")]
+		partial void OnTapped (MonoTouch.UIKit.UIButton sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (detailDescriptionLabel != null) {
-				detailDescriptionLabel.Dispose ();
-				detailDescriptionLabel = null;
+			if (lblMessage != null) {
+				lblMessage.Dispose ();
+				lblMessage = null;
 			}
 		}
 	}
 }
-
