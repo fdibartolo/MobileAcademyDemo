@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -72,9 +73,16 @@
       <DependentUpon>LoginViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="NotesTableViewController.cs" />
+    <Compile Include="Model\Note.cs" />
+    <Compile Include="DataStore\StoreBase.cs" />
+    <Compile Include="DataStore\NotesStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LoginViewController.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="DataStore\" />
+  </ItemGroup>
 </Project>
