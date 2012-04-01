@@ -1,5 +1,6 @@
 using System;
 using MonoTouch.UIKit;
+using System.Collections.Generic;
 
 namespace MobileAcademyDemo
 {
@@ -14,6 +15,12 @@ namespace MobileAcademyDemo
 	
 	public class NotesDataSource : UITableViewDataSource 
 	{
+		IList<Note> _notes;
+		
+		public NotesDataSource() {
+			_notes = new NotesStore().Read();
+		}
+		
 		public override int NumberOfSections (UITableView tableView)
 		{
 			return 1;
@@ -21,7 +28,7 @@ namespace MobileAcademyDemo
 		
 		public override int RowsInSection (UITableView tableView, int section)
 		{
-			return 1;
+			return _notes.Count;
 		}
 		
 		public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
@@ -35,7 +42,7 @@ namespace MobileAcademyDemo
 				cell.Accessory = UITableViewCellAccessory.None;
 			}
 				
-			cell.TextLabel.Text = "Some note";
+			cell.TextLabel.Text = _notes[indexPath.Row].Name;
 			return cell;
 		}
 	}
