@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using MonoTouch.UIKit;
 using System.Collections.Generic;
 
@@ -11,14 +12,33 @@ namespace MobileAcademyDemo
 			Title = "My Notes";
 			TableView.DataSource = new NotesDataSource();
 		}
+		
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+			
+			this.SetToolbarItems(
+				new UIBarButtonItem[]{ new UIBarButtonItem(UIBarButtonSystemItem.Add, _addNote)	}, false);		
+		}
+			
+		private void _addNote(object sender, EventArgs args)
+		{
+			this.PresentModalViewController(new AddNoteViewController(), true);
+		}
+		
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+			TableView.ReloadData();
+		}
 	}
 	
 	public class NotesDataSource : UITableViewDataSource 
 	{
-		IList<Note> _notes;
+		private IList<Note> _notes;
 		
 		public NotesDataSource() {
-			_notes = new NotesStore().Read();
+			_notes = DataService.GetInstance.LoadNotes();
 		}
 		
 		public override int NumberOfSections (UITableView tableView)

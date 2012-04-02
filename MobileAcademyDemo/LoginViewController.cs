@@ -19,6 +19,7 @@ namespace MobileAcademyDemo
 			{
 				var controller = new NotesTableViewController();
 				var navigationController = new UINavigationController(controller);
+				navigationController.SetToolbarHidden(false, false);
 				this.PresentModalViewController(navigationController, true);
 			}
 		}

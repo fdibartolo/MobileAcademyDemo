@@ -76,6 +76,9 @@
     <Compile Include="Model\Note.cs" />
     <Compile Include="DataStore\StoreBase.cs" />
     <Compile Include="DataStore\NotesStore.cs" />
+    <Compile Include="AddNoteViewController.cs" />
+    <Compile Include="NoteDetailsViewController.cs" />
+    <Compile Include="Services\DataService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LoginViewController.xib" />
@@ -84,5 +87,6 @@
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="DataStore\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>
