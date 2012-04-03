@@ -39,6 +39,11 @@ namespace MobileAcademyDemo
 		public Note FindNoteByName(string name) {
 			return _notes.Where(n => n.Name.Equals(name)).Single();	
 		}
+		
+		public void DeleteNote(Note note) {
+			_notes.Remove(note);
+			_store.Save(_notes);
+		}
 	}
 }
 

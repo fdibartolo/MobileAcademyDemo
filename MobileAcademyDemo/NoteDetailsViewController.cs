@@ -32,9 +32,15 @@ namespace MobileAcademyDemo
 				
 			this.View.AddSubview(view);
 				
-			if (_isUpdateMode())
+			if (_isUpdateMode()) {
 				this.NavigationItem.SetRightBarButtonItem(
 					new UIBarButtonItem("Update", UIBarButtonItemStyle.Bordered, _updateNote), false);
+			
+				SetToolbarItems(new UIBarButtonItem[]{
+					new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null),
+					new UIBarButtonItem(UIBarButtonSystemItem.Trash, _deleteNote)	
+				}, false);
+			}
 			else
 				this.NavigationItem.SetRightBarButtonItem(
 					new UIBarButtonItem(UIBarButtonSystemItem.Save, _saveNote), false);
@@ -51,6 +57,11 @@ namespace MobileAcademyDemo
 			_note.Name = textName.Text;
 			_note.Body = textBody.Text;
 			DataService.GetInstance.SaveNote(_note);
+			this.NavigationController.PopToRootViewController(true);
+		}
+		
+		private void _deleteNote(object sender, EventArgs args){
+			DataService.GetInstance.DeleteNote(_note);
 			this.NavigationController.PopToRootViewController(true);
 		}
 		
