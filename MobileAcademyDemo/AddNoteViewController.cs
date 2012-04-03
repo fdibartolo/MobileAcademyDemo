@@ -8,13 +8,12 @@ namespace MobileAcademyDemo
 	public class AddNoteViewController : UINavigationController
 	{
 		public AddNoteViewController() : base() {
-			this.PushViewController(new NoteDetailsViewController(), true);
+			this.PushViewController(new NoteDetailsViewController(new Note()), true);
 		}
 		
 		public override void ViewWillAppear (bool animated)
 		{
 			UIViewController firstController= this.ViewControllers.First();
-			firstController.NavigationItem.Title = "New Note"; 
 			firstController.NavigationItem.SetLeftBarButtonItem(
 				new UIBarButtonItem(UIBarButtonSystemItem.Cancel, _cancelNote), false);
 		}

@@ -11,6 +11,7 @@ namespace MobileAcademyDemo
 		{
 			Title = "My Notes";
 			TableView.DataSource = new NotesDataSource();
+			TableView.Delegate = new NotesTableViewDelegate(this);
 		}
 		
 		public override void ViewDidLoad ()
@@ -26,7 +27,7 @@ namespace MobileAcademyDemo
 			this.PresentModalViewController(new AddNoteViewController(), true);
 		}
 		
-		public override void ViewDidAppear (bool animated)
+		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
 			TableView.ReloadData();
@@ -64,6 +65,20 @@ namespace MobileAcademyDemo
 				
 			cell.TextLabel.Text = _notes[indexPath.Row].Name;
 			return cell;
+		}
+	}
+	
+	public class NotesTableViewDelegate : UITableViewDelegate
+	{
+		NotesTableViewController _controller;
+	
+		public NotesTableViewDelegate(NotesTableViewController controller) { _controller = controller; }
+		
+		public override void RowSelected (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
+		{
+			var cell = tableView.CellAt(indexPath);
+			var note = DataService.GetInstance.FindNoteByName(cell.TextLabel.Text);
+			_controller.NavigationController.PushViewController(new NoteDetailsViewController(note), true);
 		}
 	}
 }

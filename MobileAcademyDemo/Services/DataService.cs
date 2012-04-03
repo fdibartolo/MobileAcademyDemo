@@ -23,8 +23,21 @@ namespace MobileAcademyDemo
 		}
 		
 		public void SaveNote(Note note) {
-			_notes.Add(note);
+			if (note.Id == null) {
+				var maxId = _notes.Select(n => n.Id).Max() ?? 0;
+				note.Id = maxId + 1;
+				_notes.Add(note);
+			}
+			else {
+				var updatedNote = (from n in _notes where (n.Id == note.Id) select n).Single();
+				updatedNote.Name = note.Name;
+				updatedNote.Body = note.Body;
+			}
 			_store.Save(_notes);
+		}
+		
+		public Note FindNoteByName(string name) {
+			return _notes.Where(n => n.Name.Equals(name)).Single();	
 		}
 	}
 }

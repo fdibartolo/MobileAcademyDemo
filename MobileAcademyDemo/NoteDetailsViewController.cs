@@ -7,7 +7,12 @@ namespace MobileAcademyDemo
 	public class NoteDetailsViewController : UIViewController
 	{
 		UITextField textName = new UITextField(new RectangleF(20,30,280,30));
-		UITextField textBody = new UITextField(new RectangleF(20,80,280,300));
+		UITextField textBody = new UITextField(new RectangleF(20,80,280,260));
+		Note _note;
+		
+		public NoteDetailsViewController(Note note) {
+			_note = note;		
+		}
 		
 		public override void ViewDidLoad ()
 		{
@@ -27,14 +32,40 @@ namespace MobileAcademyDemo
 				
 			this.View.AddSubview(view);
 				
-			this.NavigationItem.SetRightBarButtonItem(
-				new UIBarButtonItem(UIBarButtonSystemItem.Save, _saveNote), false);
+			if (_isUpdateMode())
+				this.NavigationItem.SetRightBarButtonItem(
+					new UIBarButtonItem("Update", UIBarButtonItemStyle.Bordered, _updateNote), false);
+			else
+				this.NavigationItem.SetRightBarButtonItem(
+					new UIBarButtonItem(UIBarButtonSystemItem.Save, _saveNote), false);
 		}
 			
 		private void _saveNote(object sender, EventArgs args){
-			var note = new Note { Name = textName.Text, Body = textBody.Text };
-			DataService.GetInstance.SaveNote(note);
+			_note.Name = textName.Text;
+			_note.Body = textBody.Text;
+			DataService.GetInstance.SaveNote(_note);
 			this.ParentViewController.DismissModalViewControllerAnimated(true);
+		}
+		
+		private void _updateNote(object sender, EventArgs args){
+			_note.Name = textName.Text;
+			_note.Body = textBody.Text;
+			DataService.GetInstance.SaveNote(_note);
+			this.NavigationController.PopToRootViewController(true);
+		}
+		
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+			Title = (_isUpdateMode()) 
+				? "Edit Note" 
+				: "New Note";
+			textName.Text = _note.Name;
+			textBody.Text = _note.Body;
+		}
+		
+		private bool _isUpdateMode(){
+			return (_note.Id.HasValue);
 		}
 	}
 }
